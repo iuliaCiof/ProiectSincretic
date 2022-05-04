@@ -1,44 +1,43 @@
-#include <stdio.h>
-#include <math.h>
-#include <string.h>
+#include <iostream>
+#include <cmath>
+using namespace std;
 
-int main() {
-	int n = 1986;
+//Gaseste cifra romana cea mai mica si cea mai apropiata de numarul din cifre[]
+int ind_nr_apropiat(int nr){
 	int numar[7] = { 1, 5, 10, 50, 100, 500, 1000 };
-	char litere[8] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M', '\0' };
-	int cifra;
-	int ordin = 0;
-	char N[100];
-	int n_copy = n;
 	int i;
 
-
-	while ()
-		while (n != 0) {
-			cifra = n_copy % 10;
-			n_copy = n_copy / 10;
-
-			ordin++;
-		}
-
-	cifra = cifra * pow(10, ordin);
-	for (i = 2 * ordin; i < 2 * ordin + 2; i++) {
-		if (cifra == numar[i]) {
-			strcat(N, litere[i]);
-			break;
-		}
-		else if (cifra == numar[i] - 1) {
-			strcat(N, "I");
-			strcat(N, litere[i]);
+	for(i=6;i>0;i--){
+		if(nr-numar[i]>0 && nr-numar[i]<nr-numar[i-1]){  //daca diferenta e pozitiva(adica nr e mai mare decat numar[i]) si diferenta este mai mica decat numarul anterior din vectorul numar, atunci acela este numarul cel mai apropiat
+			return i;
 		}
 	}
 
+	return i;
+}
+
+int main() {
+	int N = 1986;
+	int numar[7] = { 1, 5, 10, 50, 100, 500, 1000 };
+	char litere[8] = { 'I', 'V', 'X', 'L', 'C', 'D', 'M', '\0' };
+	int cifre[4];
+	//int ordin = 0;
+	//char N[100];
+	//int n_copy = n;
+	int i=0;
 
 
+	while(N>0){
+		cifre[i] = N%10*pow(10,i); //cifrele se salveaza incepand de la ordinul cel mai mic si se adauga numarul de zerouri corespunzatoare
+		
+		cout<<cifre[i]<<" "<<numar[ind_nr_apropiat(cifre[i])] <<endl;
+		N = N/10;
+		i++;
+	}
 
+	cout<<i;	
 
-
-	printf("%s", N);
-
+	
+	
 	return 0;
 }

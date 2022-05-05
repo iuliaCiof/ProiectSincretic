@@ -3,14 +3,14 @@
 #include <string>
 using namespace std;
 
-int numar[13] = { 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 };
-string litere[14] = { "I", "IV", "V","IX", "X", "XL","L","XC", "C","CD", "D","CM", "M"};
+int numar[14] = { 0, 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 };
+string litere[14] = {"", "I", "IV", "V","IX", "X", "XL","L","XC", "C","CD", "D","CM", "M"};
 
 //Gaseste cifra romana cea mai mica si cea mai apropiata de numarul din cifre[]
 int ind_nr_apropiat(int nr){
 	int i;
 
-	for(i=13-1;i>0;i--){
+	for(i=sizeof(numar)/sizeof(int)-1;i>0;i--){
 		if(nr-numar[i]>=0 && nr-numar[i]<nr-numar[i-1]){  //daca diferenta e pozitiva(adica nr e mai mare decat numar[i]) si diferenta este mai mica decat numarul anterior din vectorul numar, atunci acela este numarul cel mai apropiat
 			return i;
 		}
@@ -45,7 +45,7 @@ int main() {
 		contor = numar[indice]+contor; 
 		
 	
-		while(contor<cifre[j]){ //bug: numerele nu sunt scurtate, de ex: 900 = DCCCC si nu CM 
+		while(contor<cifre[j]){ 
 			indice=ind_nr_apropiat(cifre[j]-contor);
 			contor = numar[indice]+contor;
 			rezultat+=litere[indice];

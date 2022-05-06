@@ -11,7 +11,7 @@ int ind_nr_apropiat(int nr){
 	int i;
 
 	for(i=sizeof(numar)/sizeof(int)-1;i>0;i--){
-		if(nr-numar[i]>=0 && nr-numar[i]<nr-numar[i-1]){  //daca diferenta e pozitiva(adica nr e mai mare decat numar[i]) si diferenta este mai mica decat numarul anterior din vectorul numar, atunci acela este numarul cel mai apropiat
+		if(nr-numar[i]>=0){  //daca diferenta e pozitiva(adica nr e mai mare decat numar[i]) si diferenta este mai mica decat numarul anterior din vectorul numar, atunci acela este numarul cel mai apropiat
 			return i;
 		}
 	}
@@ -20,13 +20,10 @@ int ind_nr_apropiat(int nr){
 }
 
 int main() {
-	int N;
-	int cifre[4];
-	int i=0;
-	int contor=0;
+	int N, cifre[10], i=0;
 	string rezultat;
 
-	cout<<"---== CONVERTOR NUMERE ARABE -> NUMERE ROMANE ==---"<<endl;
+	cout<<"---== CONVERTOR NUMERE ARABE -> ROMANE ==---"<<endl;
 	cout<<"N = ";
 	cin>>N;
 	cout<<"Rezultat = ";
@@ -41,15 +38,12 @@ int main() {
 		int indice = ind_nr_apropiat(cifre[j]);
 		rezultat+=litere[indice]; //afiseaza cifra romana corespunzatoare
 
-		contor=0;
-		contor = numar[indice]+contor; 
-		
+		int contor=numar[indice];
 	
 		while(contor<cifre[j]){ 
 			indice=ind_nr_apropiat(cifre[j]-contor);
 			contor = numar[indice]+contor;
 			rezultat+=litere[indice];
-		
 		}
 	}
 
